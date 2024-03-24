@@ -26,7 +26,7 @@ module.exports.run = async function ({ api, event, args, message }) {
 
    await api.sendMessage({
      body: `𝗝𝗼𝗻𝗻𝘆𝗦𝗶𝗻𝘀 | 🧏 ━━━━━━━━━━━━━━━━━━
-     ${answer}
+  ${answer}
 ━━━━━━━━━━━━━━━━━━\n\n- 𝚃𝚑𝚒𝚜 𝚋𝚘𝚝 𝚞𝚗𝚍𝚎𝚛 𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚍 𝚋𝚢 𝙹𝚊𝚢𝚖𝚊𝚛\n• 𝐅𝐛𝐥𝐢𝐧𝐤: >>https://www.facebook.com/jaymar.dev.00<<`,
    }, event.threadID);
    
