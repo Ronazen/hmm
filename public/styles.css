@@ -1,6 +1,6 @@
 body {
 		 padding: 20px;
-		 background-image: url("https://i.imgur.com/5OODohI.jpeg");
+		 background-image: url("https://i.imgur.com/5ramoju.jpeg");
 		 background-size: cover;
 		 font-family: 'Poppins', sans-serif;
 	   border-radius: 10px;
@@ -11,8 +11,8 @@ body {
 	   backdrop-filter: blur(10px);
 		 border-radius: 10px;
 		 padding: 20px;
-	   box-shadow: 0 0 .2rem #fff,0 0 .2rem #fff, 0 0 2rem #00e1ff,
-            0 0 0.8rem #ff0000,
+	   box-shadow: 0 0 .2rem #fff,0 0 .2rem #fff, 0 0 2rem #bc13fe,
+            0 0 0.8rem #bc13fe,
             0 0 2.8rem #bc13fe,
             inset 0 0 1.3rem #bc13fe;
 		 margin-top: 20px;
@@ -45,16 +45,16 @@ body {
 		 resize: none;
 }
  .btn-primary {
-		 background-color: #00ff00;
+		 background-color: #4a89ff;
 		 border: 1px solid #007bff;
-	   color: #9c6a6a;
+	   color: #261a1a;
 }
  .btn-primary:hover {
 		 background-color: #76d674;
 		 border: 1px solid #0056b3;
 }
  .success-message {
-		 color: green;
+		 color: #ff00fb;
 		 margin-top: 10px;
 }
  .footer {
@@ -163,7 +163,7 @@ animation: neon-border 2s linear infinite alternate; /* Adjust animation duratio
 	box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; /* Adjust shadow colors and sizes */
 }
 to {
-	border-color: #00ff00; /* End color */
+	border-color: #00bbff; /* End color */
 	box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00; /* Adjust shadow colors and sizes */
 }
  }
@@ -181,5 +181,5 @@ to {
 	 height: 70%%;
 	 object-fit: cover;
 	 margin: auto;
-      }
-      
+	 }
+	 
