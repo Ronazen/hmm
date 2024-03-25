@@ -82,6 +82,11 @@ body {
  .container-buttons .btn {
 		 margin: 5px;
 }
+ .circle img { 
+        width: 100px; 
+        height: 100px;
+        border-radius: 50%;
+}
 
  #result {
 		 padding: 10px;
