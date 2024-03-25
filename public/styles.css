@@ -32,6 +32,11 @@ body {
 		 margin-bottom: 5px;
 	   background-image: #FFFFFF;
 }
+ .circle img { 
+        width: 100px; 
+        height: 100px;
+        border-radius: 50%;
+ }
  .centered-textarea {
 		 color: #FFFFFF;
 		 display: flex;
@@ -82,12 +87,6 @@ body {
  .container-buttons .btn {
 		 margin: 5px;
 }
- .circle img { 
-        width: 100px; 
-        height: 100px;
-        border-radius: 50%;
-}
-
  #result {
 		 padding: 10px;
 		 margin-top: 20px;
