@@ -17,6 +17,9 @@ const handleEvent = async ({ event, api }) => {
 				"hello",
 				"hi",
 				"hello po",
+			        "low",
+			        "Hi",
+			        "hi po",
 				// Add other keywords as needed
 		];
 
