@@ -25,7 +25,8 @@ module.exports.run = async function ({ api, event, args, message }) {
    const answer = response.data.answer;
 
    await api.sendMessage({
-     body: `𝗛𝗘𝗥𝗨 𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 | 🤖 ━━━━━━━━━━━━━━━━━━
+     body: `𝗛𝗘𝗥𝗨 𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 | 🤖 
+━━━━━━━━━━━━━━━━━━
 ${answer}
 ━━━━━━━━━━━━━━━━━━\n\n- 𝚃𝚑𝚒𝚜 𝚋𝚘𝚝 𝚞𝚗𝚍𝚎𝚛 𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚎𝚍 𝚋𝚢 𝙹𝚊𝚢𝚖𝚊𝚛\n• 𝐅𝐛𝐥𝐢𝐧𝐤: >>https://www.facebook.com/jaymar.dev.00<<`,
    }, event.threadID);
