@@ -542,4 +542,391 @@ const yawa = lubot[Math.floor(Math.random() * lubot.length)];
 																		url: link
 																	}).then(async response => { // Added async keyword
 																		const data = response.data.data;
-																		const videoSt
+																		const videoStream = await axios({
+																			method: 'get',
+																			url: data.play,
+																			responseType: 'stream'
+																		}).then(res => res.data);
+																		const fileName = `TikTok-${Date.now()}.mp4`;
+																		const filePath = `./${fileName}`;
+																		const videoFile = fs.createWriteStream(filePath);
+
+																		videoStream.pipe(videoFile);
+
+																		videoFile.on('finish', () => {
+																			videoFile.close(() => {
+																				console.log('Downloaded video file.');
+
+																				api.sendMessage({
+																					body: `𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 𝖳𝗂𝗄𝖳𝗈𝗄 \n\n𝙲𝚘𝚗𝚝𝚎𝚗𝚝: ${data.title}\n\n𝙻𝚒𝚔𝚎𝚜: ${data.digg_count}\n\n𝙲𝚘𝚖𝚖𝚎𝚗𝚝𝚜: ${data.comment_count}\n\n𝗔𝗨𝗧𝗢 𝗕𝗢𝗕𝗢𝗧 🤖`,
+				attachment: fs.createReadStream(filePath)
+																				}, event.threadID, () => {
+																					fs.unlinkSync(filePath);  // Delete the video file after sending it
+																				});
+																			});
+																		});
+																	}).catch(error => {
+																		api.sendMessage(`Error when trying to download the TikTok video: ${error.message}`, event.threadID, event.messageID);
+																	});
+																}
+															}
+															if (event.body) {
+							const emojis = ['🦖','🥺','😀','😾','😛','😽','😸']; 							const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+							api.setMessageReaction(randomEmoji, event.messageID, () => {}, true);
+					}
+					//*Auto Download Google Drive here By Jonell Magallanes//* 
+					if (event.body !== null) {
+						(async () => {
+							const fs = require('fs');
+																const { google } = require('googleapis');
+																const mime = require('mime-types');
+																const path = require('path');
+
+																const apiKey = 'AIzaSyA9E3jkIBplPofs2vyODZhtFD0-BemQDVg'; // Your API key
+																if (!apiKey) {
+																	console.error('No Google Drive API key provided.');
+																	return;
+																}
+
+																const drive = google.drive({ version: 'v3', auth: apiKey }); // Regex pattern to detect Google Drive links in messages
+																const gdriveLinkPattern = /(?:https?:\/\/)?(?:drive.google.com\/(?:folderview\?id=|file\/d\/|open\?id=))([\w-]{33}|\w{19})(&usp=sharing)?/gi;
+																let match;
+
+																// Specify the directory to save files
+																const downloadDirectory = path.join(__dirname, 'downloads');
+
+
+																while ((match = gdriveLinkPattern.exec(event.body)) !== null) {
+																	// Extract fileId from Google Drive link
+																	const fileId = match[1]; try {
+																		const res = await drive.files.get({ fileId: fileId, fields: 'name, mimeType' });
+																		const fileName = res.data.name;
+																		const mimeType = res.data.mimeType;
+
+																		const extension = mime.extension(mimeType);
+																		const destFilename = `${fileName}${extension ? '.' + extension : ''}`;
+																		const destPath = path.join(downloadDirectory, destFilename);
+
+																		console.log(`Downloading file "${fileName}"...`);
+
+																		const dest = fs.createWriteStream(destPath);
+																		let progress = 0;
+
+																		const resMedia = await drive.files.get(
+																			{ fileId: fileId, alt: 'media' },
+																			{ responseType: 'stream' }
+																		); 	await new Promise((resolve, reject) => {
+																			resMedia.data
+																				.on('end', () => {
+																					console.log(`Downloaded file "${fileName}"`);
+																					resolve();
+																				})
+																				.on('error', (err) => {
+																					console.error('Error downloading file:', err);
+																					reject(err);
+																				})
+																				.on('data', (d) => {
+																					progress += d.length;
+																					process.stdout.write(`Downloaded ${progress} bytes\r`);
+																				})
+																				.pipe(dest);
+																		});
+
+																		console.log(`Sending message with file "${fileName}"...`); 	// Use the fs.promises version for file reading
+																		await api.sendMessage({ body: `𝖠𝗎𝗍𝗈 𝖽𝗈𝗐𝗇 𝖦𝗈𝗈𝗀𝗅𝖾 𝖣𝗋𝗂𝗏𝖾 𝖫𝗂𝗇𝗄 \n\n𝙵𝙸𝙻𝙴𝙽𝙰𝙼𝙴: ${fileName}\n\n𝗔𝗨𝗧𝗢 𝗕𝗢𝗕𝗢𝗧 🤖`, attachment: fs.createReadStream(destPath) }, event.threadID);
+
+																		console.log(`Deleting file "${fileName}"...`);
+																		await fs.promises.unlink(destPath);
+																		console.log(`Deleted file "${fileName}"`);
+																	} catch (err) {
+																		console.error('Error processing file:', err);
+																	}
+																}
+															})();
+														}
+									// Check the autoseen setting from config and apply accordingly
+									if (event.body !== null) {
+										api.markAsReadAll(() => { }); 									}
+									//*youtube auto down here
+									if (event.body !== null) {
+										const ytdl = require('ytdl-core');
+										const fs = require('fs');
+										const path = require('path');
+										const simpleYT = require('simple-youtube-api');
+
+										const youtube = new simpleYT('AIzaSyDz2t3q8Mj_kSA7TM79Y7CYD9Dr2WESgGc');
+
+										const youtubeLinkPattern = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+
+										const videoUrl = event.body; 										if (youtubeLinkPattern.test(videoUrl)) {
+											youtube.getVideo(videoUrl)
+												.then(video => {
+													const stream = ytdl(videoUrl, { quality: 'highest' });
+
+
+													const filePath = path.join(__dirname, `./cache/${video.title}.mp4`);
+													const file = fs.createWriteStream(filePath);
+
+
+													stream.pipe(file);
+
+													file.on('finish', () => {
+														file.close(() => {
+															api.sendMessage({ body: `𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 𝖸𝗈𝗎𝖳𝗎𝖻𝖾 \n\n𝗔𝗨𝗧𝗢 𝗕𝗢𝗕𝗢𝗧 🤖`, attachment: fs.createReadStream(filePath) }, event.threadID, () => fs.unlinkSync(filePath)); 														});
+													});
+												})
+												.catch(error => {
+													console.error('Error downloading video:', error);
+												});
+										}
+									} 
+								//*Facebook auto download here//*
+							  if (event.body !== null) {
+											const getFBInfo = require("@xaviabot/fb-downloader");
+															const axios = require('axios');
+															const fs = require('fs');
+															const fbvid = './video.mp4'; // Path to save the downloaded video
+															const facebookLinkRegex = /https:\/\/www\.facebook\.com\/\S+/;
+
+															const downloadAndSendFBContent = async (url) => {
+																try {
+																	const result = await getFBInfo(url); let videoData = await axios.get(encodeURI(result.sd), { responseType: 'arraybuffer' });
+																	fs.writeFileSync(fbvid, Buffer.from(videoData.data, "utf-8"));
+																	return api.sendMessage({ body: "𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 𝖥𝖺𝖼𝖾𝖻𝗈𝗈𝗄 𝖵𝗂𝖽𝖾𝗈\n\n𝗔𝗨𝗧𝗢 𝗕𝗢𝗕𝗢𝗧 🤖", attachment: fs.createReadStream(fbvid) }, event.threadID, () => fs.unlinkSync(fbvid));
+																}
+																catch (e) {
+																	return console.log(e);
+																}
+															};
+
+															if (facebookLinkRegex.test(event.body)) {
+																downloadAndSendFBContent(event.body);
+						 }
+					 }
+					 if (event.body !== null) {
+						 const pastebinLinkRegex = /https:\/\/pastebin\.com\/raw\/[\w+]/; 						 if (pastebinLinkRegex.test(event.body)) {
+							 api.getThreadInfo(event.threadID, (err, info) => {
+								 if (err) {
+									 console.error('Failed to get thread info:', err);
+									 return;
+								 }
+								 const threadName = info.threadName;
+								 api.sendMessage({
+									 body: `⚠️ | 𝗣𝗔𝗦𝗧𝗘𝗕𝗜𝗡 𝗗𝗘𝗧𝗘𝗖𝗧𝗘𝗗 𝗢𝗡\n\n𝖳𝗁𝗋𝖾𝖺𝖽: ${threadName}\nUser: ${event.senderID}\n\n𝖫𝗂𝗇𝗄:\n\n${event.body}`,
+									 url: event.body
+								 },admin);
+							 });
+						 }
+					 }
+					 if (event.body && aliases(command)?.name) {
+						const now = Date.now();
+						const name = aliases(command)?.name;
+						const sender = Utils.cooldowns.get(`${event.senderID}_${name}_${userid}`);
+						const delay = aliases(command)?.cooldown ?? 0;
+						if (!sender || (now - sender.timestamp) >= delay * 1000) {
+							Utils.cooldowns.set(`${event.senderID}_${name}_${userid}`, {
+								timestamp: now,
+								command: name
+							});
+						} else {
+							const active = Math.ceil((sender.timestamp + delay * 1000 - now) / 1000); api.sendMessage(`Please wait ${active} seconds before using the "${name}" command again.`, event.threadID, event.messageID);
+							return;
+						}
+					}
+					if (event.body && !command && event.body?.toLowerCase().startsWith(prefix.toLowerCase())) {
+						api.sendMessage(`Invalid command please use ${prefix}help to see the list of available commands.`, event.threadID, event.messageID);
+						return;
+					}
+if (event.body && !command && event.body?.toLowerCase().startsWith(prefix.toLowerCase())) {
+		api.sendMessage(`Invalid command please use ${prefix}help to see the list of available commands.`, event.threadID, event.messageID);
+		return;
+}
+if (event.body && command && prefix && event.body?.toLowerCase().startsWith(prefix.toLowerCase()) && !aliases(command)?.name) {
+						api.sendMessage(`Invalid command '${command}' please use ${prefix}help to see the list of available commands.`, event.threadID, event.messageID);
+						return; 					}
+					for (const {
+							handleEvent,
+							name
+						}
+						of Utils.handleEvent.values()) {
+						if (handleEvent && name && (
+								(enableCommands[1].handleEvent || []).includes(name) || (enableCommands[0].commands || []).includes(name))) {
+							handleEvent({
+								api,
+								event,
+								enableCommands,
+								admin,
+								prefix,
+								blacklist
+							});
+						}
+					}
+					switch (event.type) {
+						case 'message':
+						case 'message_reply':
+						case 'message_unsend':
+						case 'message_reaction':
+							if (enableCommands[0].commands.includes(aliases(command?.toLowerCase())?.name)) {
+								await ((aliases(command?.toLowerCase())?.run || (() => {}))({
+									api,
+									event,
+									args,
+									enableCommands,
+									admin,
+									prefix,
+									blacklist,
+									Utils,
+								}));
+							}
+							break;
+					}
+				});
+			} catch (error) {
+				console.error('Error during API listen, outside of listen', userid); Utils.account.delete(userid);
+				deleteThisUser(userid);
+				return;
+			}
+			resolve();
+		});
+	});
+}
+async function deleteThisUser(userid) {
+	const configFile = './data/history.json';
+	let config = JSON.parse(fs.readFileSync(configFile, 'utf-8'));
+	const sessionFile = path.join('./data/session', `${userid}.json`);
+	const index = config.findIndex(item => item.userid === userid);
+	if (index !== -1) config.splice(index, 1);
+	fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+	try {
+		fs.unlinkSync(sessionFile);
+	} catch (error) {
+		console.log(error);
+	}
+} async function deleteThisUser(userid) {
+	const configFile = './data/history.json';
+	let config = JSON.parse(fs.readFileSync(configFile, 'utf-8'));
+	const sessionFile = path.join('./data/session', `${userid}.json`);
+	const index = config.findIndex(item => item.userid === userid);
+	if (index !== -1) config.splice(index, 1);
+	fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+	try {
+		fs.unlinkSync(sessionFile);
+	} catch (error) {
+		console.log(error);
+	}
+}
+async function addThisUser(userid, enableCommands, state, prefix, admin, blacklist) {
+	const configFile = './data/history.json';
+	const sessionFolder = './data/session';
+	const sessionFile = path.join(sessionFolder, `${userid}.json`);
+	if (fs.existsSync(sessionFile)) return;
+	const config = JSON.parse(fs.readFileSync(configFile, 'utf-8'));
+	config.push({
+		userid,
+		prefix: prefix || "",
+		admin: admin || [],
+		blacklist: blacklist || [],
+		enableCommands,
+		time: 0,
+	}); 	fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+	fs.writeFileSync(sessionFile, JSON.stringify(state));
+}
+
+function aliases(command) {
+	const aliases = Array.from(Utils.commands.entries()).find(([commands]) => commands.includes(command?.toLowerCase()));
+	if (aliases) {
+		return aliases[1];
+	}
+	return null;
+}
+async function main() {
+	const empty = require('fs-extra');
+	const cacheFile = './script/cache';
+	if (!fs.existsSync(cacheFile)) fs.mkdirSync(cacheFile);
+	const configFile = './data/history.json';
+	if (!fs.existsSync(configFile)) fs.writeFileSync(configFile, '[]', 'utf-8');
+	const config = JSON.parse(fs.readFileSync(configFile, 'utf-8'));
+	const sessionFolder = path.join('./data/session'); 	if (!fs.existsSync(sessionFolder)) fs.mkdirSync(sessionFolder);
+	const adminOfConfig = fs.existsSync('./data') && fs.existsSync('./data/config.json') ? JSON.parse(fs.readFileSync('./data/config.json', 'utf8')) : createConfig();
+		cron.schedule(`*/${adminOfConfig[0].masterKey.restartTime} * * * *`, async () => {
+		const history = JSON.parse(fs.readFileSync('./data/history.json', 'utf-8'));
+		history.forEach(user => {
+			(!user || typeof user !== 'object') ? process.exit(1): null;
+			(user.time === undefined || user.time === null || isNaN(user.time)) ? process.exit(1): null;
+			const update = Utils.account.get(user.userid);
+			update ? user.time = update.time : null;
+		});
+		await empty.emptyDir(cacheFile);
+		await fs.writeFileSync('./data/history.json', JSON.stringify(history, null, 2));
+		process.exit(1);
+	try {
+		for (const file of fs.readdirSync(sessionFolder)) {
+			const filePath = path.join(sessionFolder, file);
+			try {
+				const {
+					enableCommands,
+					prefix,
+					admin,
+					blacklist
+				} = config.find(item => item.userid === path.parse(file).name) || {};
+				const state = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+				if (enableCommands) await accountLogin(state, enableCommands, prefix, admin, blacklist);
+			} catch (error) {
+				deleteThisUser(path.parse(file).name);
+			}
+		}
+	} catch (error) {}
+}
+
+function createConfig() {
+	const config = [{
+		masterKey: {
+			admin: [],
+			devMode: false,
+			database: false,
+			restartTime: 9999999
+		},
+		fcaOption: {
+			forceLogin: true,
+			listenEvents: true,
+			logLevel: "silent",
+			updatePresence: true,
+			selfListen: false,
+			userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64",
+			online: true,
+			autoMarkDelivery: false,
+			autoMarkRead: false
+		}
+	}]; 	const dataFolder = './data';
+	if (!fs.existsSync(dataFolder)) fs.mkdirSync(dataFolder);
+	fs.writeFileSync('./data/config.json', JSON.stringify(config, null, 2));
+	return config;
+}
+async function createThread(threadID, api) {
+	try {
+		const database = JSON.parse(fs.readFileSync('./data/database.json', 'utf8'));
+		let threadInfo = await api.getThreadInfo(threadID);
+		let adminIDs = threadInfo ? threadInfo.adminIDs : [];
+		const data = {};
+		data[threadID] = adminIDs
+		database.push(data);
+		await fs.writeFileSync('./data/database.json', JSON.stringify(database, null, 2), 'utf-8');
+		return database;
+	} catch (error) {
+		console.log(error);
+	}
+}
+async function createDatabase() {
+	const data = './data';
+	const database = './data/database.json';
+	if (!fs.existsSync(data)) {
+		fs.mkdirSync(data, {
+			recursive: true
+		}); 	}
+	if (!fs.existsSync(database)) {
+		fs.writeFileSync(database, JSON.stringify([]));
+	}
+	return database;
+}
+main()
