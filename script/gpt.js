@@ -19,12 +19,15 @@ module.exports.run = async function ({ api, event, args }) {
 
   const url = "https://hercai.onrender.com/v3/hercai";
 
-  if (!question) return sendMessage("🤖 𝗖𝗵𝗮𝘁𝗚𝗽𝘁\n\nPlease provide a question.");
-
+  if (!question) return sendMessage("🤖 𝗣𝗵𝗼𝗻𝗸𝗚𝗽𝘁\n\n𝙿𝚕𝚎𝚊𝚜𝚎 𝚙𝚛𝚘𝚟𝚒𝚍𝚎 𝚊 𝚚𝚞𝚎𝚜𝚝𝚒𝚘𝚗 .");
+    api.setMessageReaction("🔎", event.messageID, (err) => {}, true);
   try {
     const response = await get(`${url}?question=${encodeURIComponent(question)}`);
-    sendMessage('🤖 𝗖𝗵𝗮𝘁𝗚𝗽𝘁\n\n' + response.data.reply);
+    api.setMessageReaction("✅", event.messageID, (err) => {}, true);
+    sendMessage(response.data.reply);
   } catch (error) {
-    sendMessage("An error occurred: " + error.message);
+    sendMessage("⚠️ | Error! Please Contact the Developer for an Error\n\n-fblink: https://www.facebook.com/jaymar.dev.00" + error.message);
+    api.setMessageReaction("⚠️", event.messageID, (err) => {}, true);
   }
 };
+                           
