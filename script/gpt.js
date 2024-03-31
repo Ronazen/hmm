@@ -24,7 +24,7 @@ module.exports.run = async function ({ api, event, args }) {
   try {
     const response = await get(`${url}?question=${encodeURIComponent(question)}`);
     api.setMessageReaction("✅", event.messageID, (err) => {}, true);
-    sendMessage(response.data.reply);
+    sendMessage('🤖 𝗣𝗵𝗼𝗻𝗸𝗚𝗽𝘁\n\n' + response.data.reply);
   } catch (error) {
     sendMessage("⚠️ | Error! Please Contact the Developer for an Error\n\n-fblink: https://www.facebook.com/jaymar.dev.00" + error.message);
     api.setMessageReaction("⚠️", event.messageID, (err) => {}, true);
