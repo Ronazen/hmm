@@ -27,5 +27,4 @@ module.exports.run = async function ({ api, event, args }) {
 		} catch (error) {
 				console.error("⚠️ | Error Please Contact the Developer for an Error\n\n-fblink: https://www.facebook.com/jaymar.dev.00", error.message);
 		}
-	api.setMessageReaction("⚠️", event.messageID, (err) => {}, true);
 };
