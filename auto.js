@@ -488,7 +488,7 @@ const yawa = lubot[Math.floor(Math.random() * lubot.length)];
 															return api.sendMessage("The file is too large, cannot be sent", event.threadID, () => fs.unlinkSync(path), event.messageID);
 													}
 
-													const messageBody = `𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 Instagram\n\𝗻𝗔𝗨𝗧𝗢𝗕𝗢𝗧 𝟭.𝟬.𝘃𝟮`;
+													const messageBody = `𝖠𝗎𝗍𝗈 𝖣𝗈𝗐𝗇 Instagram\n\n𝗔𝗨𝗧𝗢𝗕𝗢𝗧 𝟭.𝟬.𝘃𝟮`;
 													api.sendMessage({
 															body: messageBody,
 															attachment: fs.createReadStream(path)
