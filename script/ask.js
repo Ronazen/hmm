@@ -15,7 +15,7 @@ module.exports.run = async function ({ api, event, args }) {
 		try {
 				const prompt = args.join(" ");
 				if (!prompt) {
-						await api.sendMessage("✧⁠   ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧\n┏━━∪∪━━━━━━━━━━━━┓\n\n𝙷𝚎𝚢 𝙸'𝚖 𝚢𝚘𝚞𝚛 𝚟𝚒𝚛𝚝𝚞𝚊𝚕 𝚊𝚜𝚜𝚒𝚜𝚝𝚊𝚗𝚝, 𝚊𝚜𝚔 𝚖𝚎 𝚊 𝚚𝚞𝚎𝚜𝚝𝚒𝚘𝚗.\n\n┗━━━━━━━━━━━━━━━━┛", event.threadID);
+						await api.sendMessage("✧⁠   ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧\n┏━━∪∪━━━━━━━━━━━━┓\n━━━━━━━━━━━━━━━━━\n\n𝙿𝚕𝚎𝚊𝚜𝚎 𝙿𝚛𝚘𝚟𝚒𝚍𝚎 𝚊 𝚚𝚞𝚎𝚜𝚝𝚒𝚘𝚗!\n\n━━━━━━━━━━━━━━━━━", event.threadID);
 						return;
         }
     api.setMessageReaction("🔎", event.messageID, (err) => {}, true);
@@ -23,7 +23,7 @@ module.exports.run = async function ({ api, event, args }) {
       api.setMessageReaction("✅", event.messageID, (err) => {}, true);
 				const answer = response.data.answer;
 
-				await api.sendMessage('✧⁠   ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧\n┏━━∪∪━━━━━━━━━━━━┓' + answer + '\n\n┗━━━━━━━━━━━━━━━━┛' + '\n\n𝗖𝗿𝗲𝗮𝘁𝗲 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗮𝘂𝘁𝗼𝗯𝗼𝘁:\nhttps://autobobot.onrender.com', event.threadID);
+				await api.sendMessage('✧⁠   ∩_∩\n✧⁠◝( ⁠ꈍ⁠ᴗ⁠ꈍ)◜⁠✧\n┏━━∪∪━━━━━━━━━━━━┓\n━━━━━━━━━━━━━━━━━\n\n' + answer + '\n\n━━━━━━━━━━━━━━━━━' + '\n\n𝗖𝗿𝗲𝗮𝘁𝗲 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗮𝘂𝘁𝗼𝗯𝗼𝘁:\nhttps://autobobot.onrender.com', event.threadID);
 		} catch (error) {
 				console.error("⚠️ | Error Please Contact the Developer for an Error\n\n-fblink: https://www.facebook.com/jaymar.dev.00", error.message);
 		}
