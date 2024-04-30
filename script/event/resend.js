@@ -13,7 +13,7 @@ module.exports.handleEvent = async function ({ api, event }) {
     }
 
   }
-  if(event.type == "message_unsend" && msgData.hasOwnProperty(event.messageID)) { 
+  if(event.type == "message_Why" && msgData.hasOwnProperty(event.messageID)) { 
 const info = await api.getUserInfo(event.senderID);
 const name = info[event.senderID].name
     const axios = require('axios');
