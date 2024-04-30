@@ -6,7 +6,7 @@ module.exports.config = {
 var msgData = {} 
 
 module.exports.handleEvent = async function ({ api, event }) {
-  if(event.type == 'message') {
+  if(event.type == ('message') {
     msgData[event.messageID] = {
       body: event.body, 
       attachments: event.attachments
