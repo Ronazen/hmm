@@ -119,7 +119,7 @@ module.exports.run = async function({ api, args, Users, event, Threads, utils, c
 		if(!id) return api.sendMessage("❎Need to enter the id of the person to be removed from the banned list of the group", threadID, messageID);
 		bans.banned;
 		if(!mybox.includes(id)) return api.sendMessage("✅This person hasn't been banned from your group yet", threadID, messageID);
-			api.sendMessage(`┏•━•━•━ ◎ ━•━•━•┓\n𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋 𝐑𝐄𝐌𝐎𝐕𝐄𝐃 ${id} \n┗•━•━•━ ◎ ━•━•━•┛  `, threadID, messageID);
+			api.sendMessage(`┏•━•━•━ ◎ ━•━•━•┓\n𝗨𝗡𝐒𝗨𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋 𝐑𝐄𝐌𝐎𝐕𝐄𝐃 ${id} \n┗•━•━•━ ◎ ━•━•━•┛  `, threadID, messageID);
 			mybox.splice(mybox.indexOf(id), 1);
 			delete bans.warns[threadID][id]
 			fs.writeFileSync(__dirname + `/cache/bans.json`, JSON.stringify(bans, null, 2));
