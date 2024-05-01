@@ -209,7 +209,7 @@ module.exports.run = async function({ api, args, Users, event, Threads, utils, c
 
 		}//for
 
-		api.sendMessage({body: `\n┌────── ～●～ ──────┐\n\n✅ SUCCESSFUL REMOVED  ${arrayname.join(", ")} \n└────── ～●～ ──────┘\n`, mentions: arraytag}, threadID, messageID);
+		api.sendMessage({body: `\n┌────── ～●～ ──────┐\n\n✅ 𝙎𝙐𝘾𝘾𝙀𝙎𝙎𝙁𝙐𝙇 𝙍𝙀𝙈𝙊𝙑𝙀𝘿  ${arrayname.join(", ")} \n└────── ～●～ ──────┘\n`, mentions: arraytag}, threadID, messageID);
 		fs.writeFileSync(__dirname + `/cache/bans.json`, JSON.stringify(bans, null, 2));
 }
 
