@@ -54,7 +54,7 @@ module.exports.run = async function ({ api, event, args, admin }) {
 	}
 
 	if (sentCount > 0) {
-		api.sendMessage(`› Sent the notification successfully.`, event.threadID);
+		api.sendMessage(`› 𝗦𝗲𝗻𝘁 𝗧𝗵𝗲 𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆.`, event.threadID);
 	} else {
 		api.sendMessage(
 			"› No eligible group threads found to send the message to.",
