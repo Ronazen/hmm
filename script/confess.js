@@ -21,7 +21,7 @@ module.exports.run = async ({ api, event, args }) => {
 	else if(reason == "")api.sendMessage("Syntax error, use: sendmsg ID_BOX [message]", event.threadID, event.messageID);
 	
 	else
-		api.sendMessage("Someone bot user has confess on you, here is the confess please read it.\n\nMessage: " + reason.join(" "), idbox, () =>
+		api.sendMessage("𝗦𝗼𝗺𝗲𝗼𝗻𝗲 𝗯𝗼𝘁 𝘂𝘀𝗲𝗿 𝗵𝗮𝘀 𝗰𝗼𝗻𝗳𝗲𝘀𝘀 𝗼𝗻 𝘆𝗼𝘂, 𝗵𝗲𝗿𝗲 𝗶𝘀 𝘁𝗵𝗲 𝗰𝗼𝗻𝗳𝗲𝘀𝘀 𝗽𝗹𝗲𝗮𝘀𝗲 𝗿𝗲𝗮𝗱 𝗶𝘁.\n\nMessage: " + reason.join(" "), idbox, () =>
 			api.sendMessage(`${api.getCurrentUserID()}`, () =>
 				api.sendMessage("Sent message: " + reason.join(" "), event.threadID)));
   }
