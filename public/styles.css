@@ -11,7 +11,10 @@ body {
 	   backdrop-filter: blur(10px);
 		 border-radius: 10px;
 		 padding: 20px;
-	   box-shadow: 0 0 .2rem #fff,0 0 .2rem #fff, 0 0 2rem #085375,
+	   box-shadow: 0 0 1rem limegreen,0 0 1rem limegreen, 0 0 1rem limegreen,
+            0 0 1rem limegreen,
+            0 0 1rem limegreen,
+            inset 0 0 1rem limegreen;
             0 0 0.8rem #bc13fe,
             0 0 2.8rem #3112ff,
             inset 0 0 1.3rem #212f52;
