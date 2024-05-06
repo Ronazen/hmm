@@ -1,6 +1,6 @@
 body {
 		 padding: 20px;
-		 background-image: url("https://i.imgur.com/NGlG6hk.gif");
+		 background-image: url("https://i.imgur.com/R7GZ1ag.jpeg");
 		 background-size: cover;
 		 font-family: 'Poppins', sans-serif;
 	   border-radius: 10px;
@@ -11,9 +11,9 @@ body {
 	   backdrop-filter: blur(10px);
 		 border-radius: 10px;
 		 padding: 20px;
-	   box-shadow: 0 0 1rem limegreen,0 0 1rem limegreen, 0 0 1rem limegreen,
+	   box-shadow: 0 0 1rem magenta,0 0 1rem limegreen, 0 0 1rem limegreen,
             0 0 1rem limegreen,
-            0 0 1rem limegreen,
+            0 0 1rem magenta,
             inset 0 0 1rem limegreen;
             0 0 0.8rem #bc13fe,
             0 0 2.8rem #3112ff,
