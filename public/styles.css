@@ -190,3 +190,8 @@ to {
 	 object-fit: cover;
 	 margin: auto;
 	 }
+#json-data {
+    background-image: url('https://i.imgur.com/ThOZmYH.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
