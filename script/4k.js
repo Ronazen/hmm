@@ -1,58 +1,52 @@
-const axios = require('axios');
-const fs = require('fs-extra');
-const tinyurl = require("tinyurl");
+const a = require('axios');
+const tinyurl = require('tinyurl');
 
-module.exports.config = {
-  name: "4k",
-  version: "6.9",
-  hasPermision: 0,
-  credits: "Us",
-  description: "Image Enhancer",
-  usePrefix: false,
-  usages: "Reply to a photo to enhance image",
-  cooldown: 3,
-};
-
-module.exports.handleEvent = async function ({ api, event }) {
-  const startsWithTrigger = (str, trigger) => str.slice(0, trigger.length) === trigger;
-
-  if (!(startsWithTrigger(event.body, "4k") || startsWithTrigger(event.body, "HD"))) return;
-
-  const args = event.body.split(/\s+/);
-  args.shift();
-
-  const { threadID, messageID } = event;
-
-  const photoUrl = event.messageReply?.attachments[0]?.url || args.join(" ");
-
-  if (!photoUrl) {
-    api.sendMessage("☑️ | Please reply to a photo to proceed enhancing images...", threadID, messageID);
-    return;
-  }
-
-  const finalUrl = await tinyurl.shorten(photoUrl);
-
-  api.sendMessage("⏳ | Enhancing please wait...", threadID, async () => {
-    try {
-      const response = await axios.get(`https://all-image-genator-d1p.onrender.com/dipto/4k?img=${encodeURIComponent(finalUrl)}&key=dipto008`);
-
-      const ImageURL = response.data.dipto;
-      const img = (await axios.get(ImageURL, { responseType: "arraybuffer" })).data;
-      const dipto = response.data.author;
-
-      const filename = __dirname + "/cache/enhanced_image.jpg";
-      fs.writeFileSync(filename, Buffer.from(img, 'binary'));
-
-      api.sendMessage({
-        body: `
-        ✅ | Successfully enhanced your image...
-        ☑️ | Author: ${dipto}`,
-        attachment: fs.createReadStream(filename)
-      }, threadID, () => fs.unlinkSync(filename), messageID);
-    } catch (error) {
-      api.sendMessage(`❎ | Error while processing image: ` + error, threadID, messageID);
+module.exports = {
+  config: {
+    name: "upscaleai",
+    aliases: ["4k", "upscale"],
+    version: "1.0",
+    author: "JARiF",
+    countDown: 15,
+    role: 0,
+    longDescription: "Upscale your image.",
+    category: "image",
+    guide: {
+      en: "{pn} reply to an image"
     }
-  });
-};
+  },
 
-module.exports.run = async function ({ api, event }) {};
+  onStart: async function ({ message, args, event, api }) {
+    let imageUrl;
+
+    if (event.type === "message_reply") {
+      const replyAttachment = event.messageReply.attachments[0];
+
+      if (["photo", "sticker"].includes(replyAttachment?.type)) {
+        imageUrl = replyAttachment.url;
+      } else {
+        return api.sendMessage(
+          { body: "❌ | Reply must be an image." },
+          event.threadID
+        );
+      }
+    } else if (args[0]?.match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/g)) {
+      imageUrl = args[0];
+    } else {
+      return api.sendMessage({ body: "❌ | Reply to an image." }, event.threadID);
+    }
+
+    try {
+      const url = await tinyurl.shorten(imageUrl);
+      const k = await a.get(`https://www.api.vyturex.com/upscale?imageUrl=${url}`);
+
+      message.reply("✅ | Please wait...");
+
+      const resultUrl = k.data.resultUrl;
+
+      message.reply({ body: "✅ | Image Upscaled.", attachment: await global.utils.getStreamFromURL(resultUrl) });
+    } catch (error) {
+      message.reply("❌ | Error: " + error.message);
+    }
+  }
+};
