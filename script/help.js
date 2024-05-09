@@ -1,4 +1,4 @@
-module.exports.config = {
+module.🙆exports🙆.config = {
   name: 'help',
   version: '1.0.0',
   role: 0,
@@ -8,7 +8,7 @@ module.exports.config = {
   usage: "Help [page] or [command]",
   credits: 'Develeoper',
 };
-module.exports.run = async function({
+module.🙆exports.🙆run = async function({
   api,
   event,
   enableCommands,
@@ -21,14 +21,15 @@ module.exports.run = async function({
     const eventCommands = enableCommands[1].handleEvent;
     const commands = enableCommands[0].commands;
     if (!input) {
-      const pages = 150;
+      const pages = 19;
       let page = 1;
       let start = (page - 1) * pages;
       let end = start + pages;
-      let helpMessage = `┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n\n  𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧: 📋\n\n`;
+      let helpMessage = `┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:📋\n\n`;
       for (let i = start; i < Math.min(end, commands.length); i++) {
-        helpMessage += `\t${i + 1}.  ${commands[i]}\n\n┗━━━━━━━━━━━━━┛\n┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝐑𝐎𝐍𝐀  (ᵕ—ᴗ—)  ♡\n┗━━━━━━━━━━━━━┛\n`;/*   }
-      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━┛\n\n`;   /*   helpMessage += '┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧: 🔖\n\n';
+        helpMessage += `\t${i + 1}.  ${commands[i]}\n`;
+      }
+      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━┛\n\n`;      helpMessage += '┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:🔖\n\n';
       eventCommands.forEach((eventCommand, index) => {
         helpMessage += `\t${eventCommand}\n\n┗━━━━━━━━━━━━━┛\n`;
       });
@@ -36,19 +37,19 @@ module.exports.run = async function({
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else if (!isNaN(input)) {
       const page = parseInt(input);
-      const pages = 150;
+      const pages = 19;
       let start = (page - 1) * pages;
       let end = start + pages;
-      let helpMessage = `┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n\n  𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧: 📋\n\n`;
+      let helpMessage = `┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:📋\n\n`;
       for (let i = start; i < Math.min(end, commands.length); i++) {
-        helpMessage += `\t${i + 1}.  ${commands[i]}\n\n┗━━━━━━━━━━━━━┛\n┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝐑𝐎𝐍𝐀  (ᵕ—ᴗ—)  ♡\n┗━━━━━━━━━━━━━┛\n`;/*
+        helpMessage += `\t${i + 1}.  ${commands[i]}\n`;
       }
-      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━┛\n\n`;/*
-      helpMessage += '\n┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧: 🔖\n\n';
+      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━┛\n\n`;
+      helpMessage += '\n┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:🔖\n\n';
       eventCommands.forEach((eventCommand, index) => {
         helpMessage += `\t${eventCommand}\n\n┗━━━━━━━━━━━━━┛`;
       });
-     // helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}`;*/
+     // helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
       const command = [...Utils.handleEvent, ...Utils.commands].find(([key]) => key.includes(input?.toLowerCase()))?.[1];
@@ -95,4 +96,4 @@ module.exports.handleEvent = async function({
   if (body?.toLowerCase().startsWith('prefix')) {
     api.sendMessage(message, threadID, messageID);
   }
-          }
+}
