@@ -1,4 +1,4 @@
-module.🙆exports🙆.config = {
+module.exports.config = {
   name: 'help',
   version: '1.0.0',
   role: 0,
@@ -8,7 +8,7 @@ module.🙆exports🙆.config = {
   usage: "Help [page] or [command]",
   credits: 'Develeoper',
 };
-module.🙆exports.🙆run = async function({
+module.exports.run = async function({
   api,
   event,
   enableCommands,
