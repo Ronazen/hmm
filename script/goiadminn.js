@@ -15,9 +15,7 @@ module.exports.handleEvent = function({ api, event, admin }) {
 		for (const id of aid) {
 			if (event.mentions[id]) {
 				var msg = [
-					"Babe nalang iatawag mo sakanya",
-					"Stop mentioning my creator, she's busy 😗",
-					"My Creator is offline tulog kasi siya😭"
+					"hinanap mopa siya, kung ako yan..."
 				];
 				api.setMessageReaction("🥺", event.messageID, (err) => {}, true);
 				return api.sendMessage({body: msg[Math.floor(Math.random()*msg.length)]}, event.threadID, event.messageID);
