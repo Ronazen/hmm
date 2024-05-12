@@ -1,16 +1,20 @@
-const a = require('axios');
+const axios = require('axios');
 const tinyurl = require('tinyurl');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   config: {
-    name: "upscaleai",
-    aliases: ["4k", "upscale"],
+    name: "4k",
+    aliases: ["upscale"],
     version: "1.0",
-    author: "JARiF",
-    countDown: 15,
+    author: "ArYAN",
+    countDown: 10,
     role: 0,
-    longDescription: "Upscale your image.",
-    category: "image",
+    longDescription: {
+      en: "Upscale your image.",
+    },
+    category: "media",
     guide: {
       en: "{pn} reply to an image"
     }
@@ -26,27 +30,32 @@ module.exports = {
         imageUrl = replyAttachment.url;
       } else {
         return api.sendMessage(
-          { body: "❌ | Reply must be an image." },
+          { body: `⛔ Please reply to an image.` },
           event.threadID
         );
       }
     } else if (args[0]?.match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/g)) {
       imageUrl = args[0];
     } else {
-      return api.sendMessage({ body: "❌ | Reply to an image." }, event.threadID);
+      return api.sendMessage(
+        { body: `⛔ Please reply to an image or provide a valid image URL.` },
+        event.threadID
+      );
     }
 
     try {
       const url = await tinyurl.shorten(imageUrl);
-      const k = await a.get(`https://www.api.vyturex.com/upscale?imageUrl=${url}`);
+      const response = await axios.get(`https://aryan-apis.onrender.com/api/4k?url=${url}&apikey=aryan`);
 
-      message.reply("✅ | Please wait...");
+      message.reply("𝗉𝗋𝗈𝖼𝖾𝗌𝗌𝗂𝗇𝗀 𝗒𝗈𝗎𝗋 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 𝗉𝗅𝖾𝖺𝗌𝖾 𝗐𝖺𝗂𝗍..........");
 
-      const resultUrl = k.data.resultUrl;
+      const resultUrl = response.data.resultUrl;
 
-      message.reply({ body: "✅ | Image Upscaled.", attachment: await global.utils.getStreamFromURL(resultUrl) });
+      const imageData = await global.utils.getStreamFromURL(resultUrl);
+
+      message.reply({ body: `🖼️ 𝗨𝗣𝗦𝗖𝗔𝗟𝗘𝗗`, attachment: imageData });
     } catch (error) {
-      message.reply("❌ | Error: " + error.message);
+      message.reply(`⛔ Invalid response from API. ${error.message} please contact the developer.`);
     }
   }
 };
