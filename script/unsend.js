@@ -17,3 +17,6 @@ module.exports.run = async function({
   if (event.type != "message_reply") return api.sendMessage("Reply to bot message", event.threadID, event.messageID);
   return api.unsendMessage(event.messageReply.messageID, err => (err) ? api.sendMessage("Something went wrong.", event.threadID, event.messageID) : '');
 }
+const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
