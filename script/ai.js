@@ -40,7 +40,7 @@ module.exports.run = async function ({ api, event, args }) {
         apiName = 'Backup Axios';
     }
 
-    if (!content) return api.sendMessage("What?\n\nExample: ai what is the solar system?", event.threadID, event.messageID);
+    if (!content) return api.sendMessage("What?\n\nExample: ai what is the tallest mountain in the world?", event.threadID, event.messageID);
 
     try {
         api.sendMessage(`🔍 |searching for your answer-_-`, event.threadID, event.messageID);
@@ -61,7 +61,7 @@ module.exports.run = async function ({ api, event, args }) {
         const totalRequestCount = await getTotalRequestCount();
         const userNames = await getUserNames(api, uid);
 
-        const responseMessage = `${result}\n\n💌 Question Asked by: ${userNames.join(', ')}\n\n𝐜𝐫𝐞𝐝𝐢𝐭𝐬: https://www.facebook.com/Roronoa.Zor0o`;
+        const responseMessage = `${result}\n\n💌 Question Asked by: ${userNames.join(', ')}\n\n:Have a good day`;
         api.sendMessage(responseMessage, event.threadID, event.messageID);
 
         await saveAxiosStatus(apiName);
