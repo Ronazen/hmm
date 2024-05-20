@@ -20,6 +20,9 @@ module.exports.run = async function ({ api, event, args, admin }) {
 
 	async function sendMessage(thread) {
 		try {
+			const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ Only admin can use this command.", event.threadID, event.messageID);
 			await api.sendMessage(
 `💛💚💙\n\n『 𝗠𝗘𝗦𝗦𝗔𝗚𝗘 』\n\n♡  ∩_∩\n（„• ֊ •„)♡\n╭─∪∪─────────⟡\n | 𝗠𝗲𝘀𝘀𝗮𝗴𝗲:「${custom}」\n ━━━━━━━━━━━━━━━━━`,
 				thread.threadID
