@@ -31,7 +31,7 @@ module.exports.run = async function({
   try {
     const { data } = await axios.get(`https://openaikey-x20f.onrender.com/api?prompt=${encodeURIComponent(input)}`);
     const response = data.response;
-    const credits = '\n𝐜𝐫𝐞𝐝𝐢𝐭𝐬: Ako';
+    const credits = '\n';
     api.sendMessage(response + credits, event.threadID, event.messageID);
   } catch (error) {
     api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
