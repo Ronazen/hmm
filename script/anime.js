@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports.config = {
   name: 'anime',
   version: '1.0.0',
-  role: 0,
+  role: 2,
   hasPrefix: true,
   aliases: ['hanime'],
   description: 'Get a random anime image',
@@ -11,7 +11,7 @@ module.exports.config = {
   credits: 'Develeoper',
   cooldown: 5,
 };
-module.exports.run = async function({
+module.exports.run = async function({ api, args, event, admin }) {
   api,
   event,
   args
