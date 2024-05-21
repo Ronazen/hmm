@@ -13,7 +13,7 @@ module.exports. run = async ({ api, event, args }) => {
 	
 	const rona = "100082748880815";
    if (!rona.includes(event.senderID))
-   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
+   return api.sendMessage("❌ YOU DON'T HAVE PERMISSION TO USE THIS COMMAND😝.", event.threadID, event.messageID);
 
 	api.setMessageReaction("⏳", event.messageID, (err) => {
 		 }, true);
