@@ -8,7 +8,7 @@ module.exports.config = {
   usage: "Help [page] or [command]",
   credits: 'Develeoper',
 };
-module.exports.run = async function({ api, args, event, admin }) {
+module.exports.run = async function({
   api,
   event,
   enableCommands,
@@ -96,4 +96,4 @@ module.exports.handleEvent = async function({
   if (body?.toLowerCase().startsWith('prefix')) {
     api.sendMessage(message, threadID, messageID);
   }
-  }
+        }
