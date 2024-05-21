@@ -35,6 +35,9 @@ class Imgur {
 module.exports.run = async function ({ api, event }) {
 	const imgur = new Imgur();
 	const array = [];
+	const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
 
 	if (event.type !== "message_reply" || event.messageReply.attachments.length === 0) {
 		return api.sendMessage("Please reply with the photo/video/gif that you need to upload", event.threadID, event.messageID);
