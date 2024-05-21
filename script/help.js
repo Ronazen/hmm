@@ -1,14 +1,14 @@
-module.exports.config = {
+module .exports. config = {
   name: 'help',
   version: '1.0.0',
-  role: 2,
+  role: 3,
   hasPrefix: false,
   aliases: ['help'],
   description: "Beginner's guide",
   usage: "Help [page] or [command]",
   credits: 'Develeoper',
 };
-module.exports.run = async function({ api, args, event, admin }) {
+module .exports .run = async function({ api, args, event, admin }) {
   api,
   event,
   enableCommands,
@@ -18,9 +18,6 @@ module.exports.run = async function({ api, args, event, admin }) {
 }) {
   const input = args.join(' ');
   try {
-    const rona = "100082748880815";
-   if (!rona.includes(event.senderID))
-   return api.sendMessage("ONLY ADMIN CAN USE THIS COMMAND.", event.threadID, event.messageID);
     const eventCommands = enableCommands[1].handleEvent;
     const commands = enableCommands[0].commands;
     if (!input) {
@@ -99,4 +96,4 @@ module.exports.handleEvent = async function({
   if (body?.toLowerCase().startsWith('prefix')) {
     api.sendMessage(message, threadID, messageID);
   }
-          }
+  }
