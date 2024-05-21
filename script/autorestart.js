@@ -51,3 +51,6 @@ module.exports.run = async  ({ api, event, args }) => {
       var timeNow = moment.tz("Asia/Manila").format("HH:mm:ss");
 api.sendMessage(`${timeNow}`, event.threadID)
 }
+const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
