@@ -3,7 +3,7 @@ const fs = require("fs");
 module.exports.config = {
 		name: "prefix",
 		version: "1.0.1",
-		role: 0,
+		role: 2,
 		credits: "cliff",
 		description: "Display the prefix of your bot",
 		hasPrefix: false,
