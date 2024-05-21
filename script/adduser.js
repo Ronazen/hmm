@@ -18,6 +18,10 @@ module.exports.run = async function ({ api, event, args }) {
 	if (!isNaN(args[0])) return adduser(args[0], undefined);
 	else {
 		try {
+			const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
+			
 			var [id, name, fail] = await getUID(args[0], api);
 			if (fail == true && id != null) return out(id);
 			else if (fail == true && id == null) return out("User ID not found.")
