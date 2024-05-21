@@ -23,6 +23,9 @@ module.exports.run = function ({ api, event, prefix, admin }) {
 				);
 				return;
 		}
+	const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
 
 		api.sendMessage(
 				{
