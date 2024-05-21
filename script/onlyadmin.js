@@ -1,7 +1,3 @@
-const fs = require("fs-extra");
-const { config } = global.GoatBot;
-const { client } = global;
-
 module.exports = {
 	config: {
 		name: "adminonly",
