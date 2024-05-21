@@ -2,7 +2,7 @@ module.exports.config = {
 		name: 'check',
 		version: '0.0.1',
 		role: 0,
-		credits: 'clifff',
+		credits: '    ',
 		description: '',
 		hasPrefix: false,
 		usage: '.checkweb [domain]',
@@ -12,7 +12,7 @@ module.exports.config = {
 let axios = require('axios');
 let cheerio = require('cheerio');
 
-module.exports.run = async function({ api, event, args }) {
+module.exports.run = async function({ api, args, event, admin }) {
 		let send = msg => api.sendMessage(msg, event.threadID, event.messageID);
 
 		axios.get('https://scam.vn/check-website?domain=' + encodeURIComponent(args[0])).then(res => {
