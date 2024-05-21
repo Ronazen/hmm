@@ -14,7 +14,7 @@ module.exports = {
 		version: "1.0",
 		author: "Kaizenji",
               countDown: 5,
-		role: 3,
+		role: 0,
 		shortDescription: "nhentai anime",
 		longDescription: "sends random nhentai",
 		category: "18+ VIP",
