@@ -24,7 +24,7 @@ module.exports.run = async function({ api, args, event, admin }) {
     const eventCommands = enableCommands[1].handleEvent;
     const commands = enableCommands[0].commands;
     if (!input) {
-      const pages = 50;
+      const pages = 19;
       let page = 1;
       let start = (page - 1) * pages;
       let end = start + pages;
