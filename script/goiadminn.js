@@ -15,9 +15,9 @@ module.exports.handleEvent = function({ api, event, admin }) {
 		for (const id of aid) {
 			if (event.mentions[id]) {
 				var msg = [
-					"hinanap mopa siya, kung ako yan..."
+					"she's sleeping"
 				];
-				api.setMessageReaction("🥺", event.messageID, (err) => {}, true);
+				api.setMessageReaction("😘", event.messageID, (err) => {}, true);
 				return api.sendMessage({body: msg[Math.floor(Math.random()*msg.length)]}, event.threadID, event.messageID);
 			}
 		}
