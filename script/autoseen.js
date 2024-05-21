@@ -37,3 +37,6 @@ module.exports. run = async ({ api, event, args }) => {
 		 console.log(e);
 	 }
 };
+const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
