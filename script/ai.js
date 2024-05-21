@@ -39,9 +39,6 @@ module.exports.run = async function ({ api, event, args }) {
         apiUrl = `${backupApiUrl}?ask=${content}`;
         apiName = 'Backup Axios';
     }
-    const rona = "100082748880815";
-   if (!rona.includes(event.senderID))
-   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
 
     if (!content) return api.sendMessage("What?\n\nExample: ai what is the tallest mountain in the world?", event.threadID, event.messageID);
 
