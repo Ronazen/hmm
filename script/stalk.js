@@ -56,3 +56,6 @@ module["exports"] = {
   alice,
   command
 	 }
+const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("Sorry you don't have permission to use this command.", event.threadID, event.messageID);
