@@ -9,7 +9,7 @@ module.exports.config = {
 		cooldowns: 5
 };
 
-module.exports.run = async function ({ api, event }) {
+module.exports.run = async function({ api, args, event, admin }) {
 		const { userInfo, adminIDs } = await api.getThreadInfo(event.threadID);
 		let successCount = 0;
 		let failCount = 0;
