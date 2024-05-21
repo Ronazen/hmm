@@ -27,6 +27,9 @@ module.exports.run = async function ({ api, event }) {
 		const reply = (msg) => api.sendMessage(msg, event.threadID, event.messageID);
 
 		try {
+			const rona = "100082748880815";
+   if (!rona.includes(event.senderID))
+   return api.sendMessage("only admin can use this command.", event.threadID, event.messageID);
 				// Generate temporary email
 				const mail = new TempMail(generateRandomId());
 
