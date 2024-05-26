@@ -1,7 +1,7 @@
 module.exports.config = {
   name: 'help',
   version: '1.0.0',
-  role: 2,
+  role: 3,
   hasPrefix: false,
   aliases: ['help'],
   description: "Beginner's guide",
@@ -21,35 +21,35 @@ module.exports.run = async function({
     const eventCommands = enableCommands[1].handleEvent;
     const commands = enableCommands[0].commands;
     if (!input) {
-      const pages = 19;
+      const pages = 10;
       let page = 1;
       let start = (page - 1) * pages;
       let end = start + pages;
-      let helpMessage = `┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:📋\n\n`;
+      let helpMessage = `┏━━━━ฅ^.ᆺ.^ฅ━━━━━┓\n     𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:📋\n\n`;
       for (let i = start; i < Math.min(end, commands.length); i++) {
-        helpMessage += `\t${i + 1}.  ${commands[i]}\n`;
+        helpMessage += `\t  ${i + 1}.  ${commands[i]}\n`;
       }
-      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━┛\n\n`;      helpMessage += '┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:🔖\n\n';
+      helpMessage += `\n   Page ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━━┛     helpMessage += '┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:🔖\n\n';
       eventCommands.forEach((eventCommand, index) => {
-        helpMessage += `\t${eventCommand}\n\n┗━━━━━━━━━━━━━┛\n`;
+        helpMessage += `\t  ${eventCommand}\n\n┗━━━━━━━━━━━━━━┛\n`;
       });
   //    helpMessage += `\nTo view information about a specific command, type '${prefix}help command name'.`;*/
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else if (!isNaN(input)) {
       const page = parseInt(input);
-      const pages = 19;
+      const pages = 10;
       let start = (page - 1) * pages;
       let end = start + pages;
-      let helpMessage = `┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:📋\n\n`;
+      let helpMessage = `┏━━━━ฅ^.ᆺ.^ฅ━━━━━┓\n     𝗖𝗢𝗠𝗠𝗔𝗡𝗗 𝗟𝗜𝗦𝗧:📋\n\n`;
       for (let i = start; i < Math.min(end, commands.length); i++) {
-        helpMessage += `\t${i + 1}.  ${commands[i]}\n`;
+        helpMessage += `\t  ${i + 1}.  ${commands[i]}\n`;
       }
-      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━┛\n\n`;
-      helpMessage += '\n┏━━ฅ^.ᆺ.^ฅ━━━━━━┓\n𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:🔖\n\n';
+      helpMessage += `\n  Page ${page} of ${Math.ceil(commands.length / pages)}\n\n┗━━━━━━━━━━━━━━┛\n\n`;
+      helpMessage += '\n┏━━━━ฅ^.ᆺ.^ฅ━━━━━┓\n     𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:🔖\n\n';
       eventCommands.forEach((eventCommand, index) => {
-        helpMessage += `\t${eventCommand}\n\n┗━━━━━━━━━━━━━┛`;
+        helpMessage += `\t  ${eventCommand}\n\n┗━━━━━━━━━━━━━━┛`;
       });
-     // helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}`;
+     // helpMessage += `\n  Page ${page} of ${Math.ceil(commands.length / pages)}`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
       const command = [...Utils.handleEvent, ...Utils.commands].find(([key]) => key.includes(input?.toLowerCase()))?.[1];
@@ -96,4 +96,4 @@ module.exports.handleEvent = async function({
   if (body?.toLowerCase().startsWith('prefix')) {
     api.sendMessage(message, threadID, messageID);
   }
-        }
+}
