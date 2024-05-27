@@ -15,10 +15,7 @@ module.exports.run = async function ({api, event, args}) {
 	if (!args[0]) {
 		api.sendMessage("Please provide a question.", event.threadID, event.messageID);
 		return;
-	}
-	const rona = "100082748880815";
-   if (!rona.includes(event.senderID))
-   return api.sendMessage("❌ only admin can  use this command.", event.threadID, event.messageID);
+	} 
 
 	const query = encodeURIComponent(args.join(" "));
 	const apiUrl = `https://api.easy-api.online/api/blackbox?query=${query}`;
